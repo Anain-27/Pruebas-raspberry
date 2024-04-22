@@ -42,7 +42,13 @@ import re
 import struct
 import sys
 import threading
+'''Para guardar en csv'''
+import csv
+
 import time
+
+file = open('datos.csv', 'w', newline='')
+writer = csv.writer(file, delimiter=';')
 
 import serial
 from serial.tools.list_ports import comports
@@ -588,6 +594,8 @@ if __name__ == '__main__':
 
 	def proc_emg(emg, moving, times=[]):
 		print(emg)
+		#Escribimos la señal
+		writer.writerow(emg)
 
 	m.add_emg_handler(proc_emg)
 	m.connect()
